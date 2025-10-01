@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, Code as Code2, Database, Brain, Star, Calendar, User, ChevronDown, MessageSquare } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Code as Code2, Database, Brain, Star, Calendar, User, ChevronDown, MessageSquare, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -148,6 +148,89 @@ const skills = [
   }
 ];
 
+const clientReviews = [
+  {
+    id: 1,
+    clientName: "Sarah Johnson",
+    company: "TechStart Inc.",
+    country: "United States",
+    flag: "🇺🇸",
+    project: "E-Commerce Platform",
+    rating: 5,
+    review: "Exceptional work on our e-commerce platform! The React implementation is flawless, and the Stripe integration works perfectly. Our sales increased by 40% after launch. Highly recommend!"
+  },
+  {
+    id: 2,
+    clientName: "Hiroshi Tanaka",
+    company: "Nakamura Trading Co.",
+    country: "Japan",
+    flag: "🇯🇵",
+    project: "DeFi Trading Platform",
+    rating: 5,
+    review: "素晴らしいDeFiプラットフォームを開発していただきました。Solanaブロックチェーンの実装が完璧で、取引量が3倍に増加しました。技術力の高さに感動しています。"
+  },
+  {
+    id: 3,
+    clientName: "Emma Williams",
+    company: "GlobalTranslate Ltd.",
+    country: "United Kingdom",
+    flag: "🇬🇧",
+    project: "AI-Powered Translation Website",
+    rating: 5,
+    review: "Outstanding AI translation platform! The real-time translation feature supports 50+ languages flawlessly. Our international reach expanded dramatically. Professional and innovative work!"
+  },
+  {
+    id: 4,
+    clientName: "Yuki Sato",
+    company: "Tokyo Innovations",
+    country: "Japan",
+    flag: "🇯🇵",
+    project: "Project Management Dashboard",
+    rating: 5,
+    review: "プロジェクト管理ダッシュボードの開発、本当にありがとうございました。Next.jsとTypeScriptの技術力が素晴らしく、チームの生産性が大幅に向上しました。"
+  },
+  {
+    id: 5,
+    clientName: "Michael Chen",
+    company: "Silicon Valley Analytics",
+    country: "United States",
+    flag: "🇺🇸",
+    project: "Social Media Analytics Platform",
+    rating: 5,
+    review: "Incredible analytics platform! The data visualization and real-time insights are game-changing. Our client engagement metrics improved by 60%. Expert-level development skills!"
+  },
+  {
+    id: 6,
+    clientName: "Akira Yamamoto",
+    company: "Osaka Supply Chain",
+    country: "Japan",
+    flag: "🇯🇵",
+    project: "Inventory Management System",
+    rating: 5,
+    review: "在庫管理システムの開発、素晴らしい仕事でした。MongoDBとNode.jsの実装が完璧で、在庫の精度が95%に向上しました。技術的な問題解決能力が非常に高いです。"
+  },
+  {
+    id: 7,
+    clientName: "David Rodriguez",
+    company: "Madrid FinTech",
+    country: "Spain",
+    flag: "🇪🇸",
+    project: "Solana NFT Marketplace",
+    rating: 5,
+    review: "Excelente trabajo en el marketplace de NFTs! La integración con Solana es perfecta y la interfaz de usuario es increíble. Nuestras ventas de NFTs aumentaron un 200%. ¡Altamente recomendado!"
+  },
+  {
+    id: 8,
+    clientName: "Lisa Anderson",
+    company: "Stockholm Blockchain",
+    country: "Sweden",
+    flag: "🇸🇪",
+    project: "Cardano DeFi Protocol",
+    rating: 5,
+    review: "Fantastiskt arbete med DeFi-protokollet! Cardano-implementeringen är perfekt och säkerheten är exceptionell. Vår plattform har blivit en av de mest betrodda i branschen."
+  }
+];
+
 const fullStackProjects = [
   {
     title: "E-Commerce Platform",
@@ -231,7 +314,7 @@ const fullStackProjects = [
     description: "Enterprise inventory management with barcode scanning and reporting",
     tech: ["React", "Express", "MySQL", "Docker"],
     year: "2022",
-    image: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=600",
+    image: "https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.zoho.com/inventory",
     github: "https://github.com/zoho",
     role: "Full-Stack Developer",
@@ -518,6 +601,83 @@ const certifications = [
   }
 ];
 
+// Mobile Slideshow Component
+const MobileSlideshow = ({ 
+  items, 
+  currentIndex, 
+  setCurrentIndex, 
+  renderItem, 
+  title 
+}: { 
+  items: any[], 
+  currentIndex: number, 
+  setCurrentIndex: (index: number) => void, 
+  renderItem: (item: any, index: number) => React.ReactNode,
+  title: string
+}) => {
+  const nextSlide = () => {
+    setCurrentIndex((currentIndex + 1) % items.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex(currentIndex === 0 ? items.length - 1 : currentIndex - 1);
+  };
+
+  return (
+    <div className="md:hidden">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-500">
+            {currentIndex + 1} / {items.length}
+          </span>
+          <div className="flex gap-1">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={prevSlide}
+              className="h-8 w-8 p-0"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={nextSlide}
+              className="h-8 w-8 p-0"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
+      
+      <motion.div
+        key={currentIndex}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ duration: 0.3 }}
+      >
+        {renderItem(items[currentIndex], currentIndex)}
+      </motion.div>
+      
+      {/* Dots indicator */}
+      <div className="flex justify-center gap-2 mt-4">
+        {items.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 rounded-full transition-colors ${
+              index === currentIndex ? 'bg-blue-600' : 'bg-gray-300'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const ProjectCard = ({ project, index }: { project: any; index: number }) => (
   <motion.div
     variants={fadeInUp}
@@ -583,15 +743,15 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => (
         )}
         <div className="flex gap-2">
           {project.website && (
-            <Button
-              variant="ghost"
-              size="sm"
+        <Button
+          variant="ghost"
+          size="sm"
               className="flex-1 justify-center hover:bg-blue-50 hover:text-blue-600"
               onClick={() => window.open(project.website, '_blank')}
-            >
+        >
               <ExternalLink className="h-4 w-4 mr-1" />
               Live Site
-            </Button>
+        </Button>
           )}
           {project.github && (
             <Button
@@ -613,13 +773,22 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => (
 export default function Portfolio() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedCertificate, setSelectedCertificate] = useState<{title: string, image: string, issuer: string} | null>(null);
+  
+  // Slideshow states for mobile view
+  const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
+  const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
+  const [currentCertIndex, setCurrentCertIndex] = useState(0);
+  const [currentFullStackIndex, setCurrentFullStackIndex] = useState(0);
+  const [currentBlockchainIndex, setCurrentBlockchainIndex] = useState(0);
+  const [currentAIIndex, setCurrentAIIndex] = useState(0);
 
-  const navigationItems = ['About', 'Skills', 'Certifications', 'Full-Stack', 'Blockchain', 'AI', 'Blog', 'Contact'];
+  const navigationItems = ['About', 'Skills', 'Reviews', 'Certifications', 'Full-Stack', 'Blockchain', 'AI', 'Blog', 'Contact'];
   
   const getSectionId = (item: string) => {
     const mapping: { [key: string]: string } = {
       'About': 'about',
-      'Skills': 'skills', 
+      'Skills': 'skills',
+      'Reviews': 'reviews',
       'Certifications': 'certifications',
       'Full-Stack': 'full-stack',
       'Blockchain': 'blockchain',
@@ -856,12 +1025,13 @@ export default function Portfolio() {
           >
             Technical Skills
           </motion.h2>
+          {/* Desktop Grid */}
           <motion.div 
             variants={stagger}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="space-y-4"
+            className="space-y-4 hidden md:block"
           >
             {skills.map((skill, index) => (
               <motion.div key={index} variants={fadeInUp}>
@@ -883,6 +1053,176 @@ export default function Portfolio() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Mobile Slideshow */}
+          <MobileSlideshow
+            items={skills}
+            currentIndex={currentSkillIndex}
+            setCurrentIndex={setCurrentSkillIndex}
+            title="Technical Skills"
+            renderItem={(skill, index) => (
+              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-gray-800 font-medium text-lg">{skill.name}</span>
+                  <span className="text-gray-800 font-bold text-lg">{skill.percentage}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${skill.percentage}%` }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
+                  />
+                </div>
+              </div>
+            )}
+          />
+        </div>
+      </section>
+
+      {/* Client Reviews Section */}
+      <section id="reviews" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Client Reviews
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              What clients from around the world say about my work
+            </p>
+          </motion.div>
+
+          {/* Desktop Grid */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 hidden md:grid"
+          >
+            {clientReviews.map((review, index) => (
+              <motion.div key={review.id} variants={fadeInUp}>
+                <Card className="h-full bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <CardHeader className="pb-4">
+                    <div className="mb-4">
+                      <h3 className="font-semibold text-gray-900 text-lg">{review.clientName}</h3>
+                      <p className="text-sm text-gray-600">{review.company}</p>
+                      <div className="flex items-center gap-1 mt-1">
+                        <span className="text-lg">{review.flag}</span>
+                        <span className="text-sm text-gray-500">{review.country}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-2 mb-3">
+                      <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                        {review.project}
+                      </Badge>
+                    </div>
+
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-4 h-4 ${
+                            i < review.rating
+                              ? 'text-yellow-400 fill-current'
+                              : 'text-gray-300'
+                          }`}
+                        />
+                      ))}
+                      <span className="ml-2 text-sm font-medium text-gray-600">
+                        {review.rating}/5
+                      </span>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="pt-0">
+                    <div className="relative">
+                      <Quote className="absolute -top-2 -left-2 w-6 h-6 text-blue-100" />
+                      <p className="text-gray-700 leading-relaxed pl-4">
+                        {review.review}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Mobile Slideshow */}
+          <MobileSlideshow
+            items={clientReviews}
+            currentIndex={currentReviewIndex}
+            setCurrentIndex={setCurrentReviewIndex}
+            title="Client Reviews"
+            renderItem={(review, index) => (
+              <Card className="h-full bg-white border-0 shadow-lg">
+                <CardHeader className="pb-4">
+                  <div className="mb-4">
+                    <h3 className="font-semibold text-gray-900 text-lg">{review.clientName}</h3>
+                    <p className="text-sm text-gray-600">{review.company}</p>
+                    <div className="flex items-center gap-1 mt-1">
+                      <span className="text-lg">{review.flag}</span>
+                      <span className="text-sm text-gray-500">{review.country}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 mb-3">
+                    <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                      {review.project}
+                    </Badge>
+                  </div>
+
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${
+                          i < review.rating
+                            ? 'text-yellow-400 fill-current'
+                            : 'text-gray-300'
+                        }`}
+                      />
+                    ))}
+                    <span className="ml-2 text-sm font-medium text-gray-600">
+                      {review.rating}/5
+                    </span>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="pt-0">
+                  <div className="relative">
+                    <Quote className="absolute -top-2 -left-2 w-6 h-6 text-blue-100" />
+                    <p className="text-gray-700 leading-relaxed pl-4">
+                      {review.review}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          />
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-3 rounded-full">
+              <Star className="w-5 h-5 text-yellow-400 fill-current" />
+              <span className="text-lg font-semibold text-gray-800">
+                Average Rating: 5.0/5.0
+              </span>
+              <span className="text-sm text-gray-600">
+                ({clientReviews.length} reviews)
+              </span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -902,12 +1242,13 @@ export default function Portfolio() {
               Professional certifications validating my expertise in key technologies and software engineering
             </p>
           </motion.div>
+          {/* Desktop Grid */}
           <motion.div 
             variants={stagger}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 hidden md:grid"
           >
             {certifications.map((cert, index) => (
               <motion.div key={index} variants={fadeInUp}>
@@ -952,6 +1293,53 @@ export default function Portfolio() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Mobile Slideshow */}
+          <MobileSlideshow
+            items={certifications}
+            currentIndex={currentCertIndex}
+            setCurrentIndex={setCurrentCertIndex}
+            title="Certifications"
+            renderItem={(cert, index) => (
+              <Card className="group h-full overflow-hidden shadow-lg border-0 bg-gradient-to-br from-white to-gray-50">
+                <div className="relative overflow-hidden">
+                  <img
+                    src={cert.image}
+                    alt={cert.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-4 right-4">
+                    <Badge variant="secondary" className="bg-white/90 text-gray-800">
+                      <Calendar className="h-3 w-3 mr-1" />
+                      {cert.date.split(' ')[1]}
+                    </Badge>
+                  </div>
+                </div>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg font-semibold">
+                    {cert.title}
+                  </CardTitle>
+                  <CardDescription className="text-sm text-gray-600">
+                    {cert.issuer}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                    {cert.description}
+                  </p>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="w-full justify-center hover:bg-blue-50 hover:text-blue-600"
+                    onClick={() => openCertificateModal(cert)}
+                  >
+                    View Certificate
+                    <ExternalLink className="h-4 w-4 ml-2" />
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+          />
         </div>
       </section>
 
@@ -971,11 +1359,23 @@ export default function Portfolio() {
               Comprehensive web applications using modern frameworks and technologies
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          {/* Desktop Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 hidden md:grid">
             {fullStackProjects.map((project, index) => (
               <ProjectCard key={index} project={project} index={index} />
             ))}
           </div>
+
+          {/* Mobile Slideshow */}
+          <MobileSlideshow
+            items={fullStackProjects}
+            currentIndex={currentFullStackIndex}
+            setCurrentIndex={setCurrentFullStackIndex}
+            title="Full-Stack Projects"
+            renderItem={(project, index) => (
+              <ProjectCard project={project} index={index} />
+            )}
+          />
         </div>
       </section>
 
@@ -995,11 +1395,23 @@ export default function Portfolio() {
               Decentralized applications and smart contracts on various blockchain networks
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          {/* Desktop Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 hidden md:grid">
             {blockchainProjects.map((project, index) => (
               <ProjectCard key={index} project={project} index={index} />
             ))}
           </div>
+
+          {/* Mobile Slideshow */}
+          <MobileSlideshow
+            items={blockchainProjects}
+            currentIndex={currentBlockchainIndex}
+            setCurrentIndex={setCurrentBlockchainIndex}
+            title="Blockchain Projects"
+            renderItem={(project, index) => (
+              <ProjectCard project={project} index={index} />
+            )}
+          />
         </div>
       </section>
 
@@ -1019,11 +1431,23 @@ export default function Portfolio() {
               Intelligent web applications and websites powered by artificial intelligence and machine learning
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          {/* Desktop Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 hidden md:grid">
             {aiProjects.map((project, index) => (
               <ProjectCard key={index} project={project} index={index} />
             ))}
           </div>
+
+          {/* Mobile Slideshow */}
+          <MobileSlideshow
+            items={aiProjects}
+            currentIndex={currentAIIndex}
+            setCurrentIndex={setCurrentAIIndex}
+            title="AI Projects"
+            renderItem={(project, index) => (
+              <ProjectCard project={project} index={index} />
+            )}
+          />
         </div>
       </section>
 
