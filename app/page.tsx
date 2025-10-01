@@ -504,7 +504,7 @@ export default function Portfolio() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedCertificate, setSelectedCertificate] = useState<{title: string, image: string, issuer: string} | null>(null);
 
-  const navigationItems = ['About', 'Skills', 'Certifications', 'Full-Stack', 'Blockchain', 'AI', 'Contact'];
+  const navigationItems = ['About', 'Skills', 'Certifications', 'Full-Stack', 'Blockchain', 'AI', 'Blog', 'Contact'];
   
   const getSectionId = (item: string) => {
     const mapping: { [key: string]: string } = {
@@ -514,12 +514,20 @@ export default function Portfolio() {
       'Full-Stack': 'full-stack',
       'Blockchain': 'blockchain',
       'AI': 'ai',
+      'Blog': 'blog',
       'Contact': 'contact'
     };
     return mapping[item] || item.toLowerCase();
   };
 
   const scrollToSection = (item: string) => {
+    if (item === 'Blog') {
+      // Navigate to blog page
+      setIsMobileMenuOpen(false);
+      window.location.href = '/blog';
+      return;
+    }
+    
     const sectionId = getSectionId(item);
     const element = document.getElementById(sectionId);
     if (element) {

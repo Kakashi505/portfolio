@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key'
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://boqainjjrbzqshoglakb.supabase.co'
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvcWFpbmpqcmJ6cXNob2dsYWtiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkyODk3NzUsImV4cCI6MjA3NDg2NTc3NX0.5AZ3mSgPABa4qsVpnxuMjaXDZvHyLInwoLVDh5zUuAs'
 
 export const supabase = createClient(supabaseUrl, supabaseKey)
 
@@ -53,4 +53,30 @@ export interface AdminUser {
   role: 'admin' | 'super_admin'
   created_at: string
   updated_at: string
+}
+
+export interface BlogPost {
+  id: string
+  title: string
+  slug: string
+  excerpt?: string
+  content: string
+  featured_image?: string
+  tags?: string[]
+  category?: string
+  status: 'draft' | 'published' | 'archived'
+  published_at?: string
+  author_id?: string
+  views: number
+  likes: number
+  created_at: string
+  updated_at: string
+}
+
+export interface Post {
+  id: string
+  title: string
+  body: string
+  published: boolean
+  created_at: string
 }

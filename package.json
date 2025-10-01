@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test-supabase": "node scripts/test-supabase.js",
+    "setup-db": "node scripts/setup-database.js",
+    "setup-posts": "node scripts/setup-posts-db.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
