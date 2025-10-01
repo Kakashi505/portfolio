@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test-supabase": "node scripts/test-supabase.js",
     "setup-db": "node scripts/setup-database.js",
-    "setup-posts": "node scripts/setup-posts-db.js"
+    "setup-posts": "node scripts/setup-posts-db.js",
+    "quick-setup": "node scripts/quick-setup.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
