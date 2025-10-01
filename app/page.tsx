@@ -20,21 +20,131 @@ const stagger = {
   }
 };
 
-const skillCategories = [
+const skills = [
   {
-    title: "Full-Stack Development",
-    icon: <Code2 className="h-6 w-6" />,
-    skills: ["React", "Next.js", "Vue", "Node.js", "Express", "Nuxt", "Angular.js", "Django", "MongoDB", "PostgreSQL", "TypeScript", "GraphQL"]
+    name: "Python",
+    percentage: 95,
+    color: "from-blue-500 to-blue-600"
   },
   {
-    title: "Blockchain Development", 
-    icon: <Database className="h-6 w-6" />,
-    skills: ["Solana", "Cardano", "Sui", "Smart Contracts", "Web3", "DeFi", "NFTs", "Rust"]
+    name: "JavaScript",
+    percentage: 92,
+    color: "from-yellow-400 to-yellow-500"
   },
   {
-    title: "AI & Machine Learning",
-    icon: <Brain className="h-6 w-6" />,
-    skills: ["TensorFlow", "PyTorch", "NLP", "Deep Learning", "Computer Vision", "LLMs", "Python", "Transformers"]
+    name: "React",
+    percentage: 90,
+    color: "from-cyan-400 to-cyan-500"
+  },
+  {
+    name: "Vue.js",
+    percentage: 88,
+    color: "from-green-500 to-green-600"
+  },
+  {
+    name: "Ruby",
+    percentage: 85,
+    color: "from-red-500 to-red-600"
+  },
+  {
+    name: "Node.js",
+    percentage: 94,
+    color: "from-green-600 to-green-700"
+  },
+  {
+    name: "TypeScript",
+    percentage: 92,
+    color: "from-blue-600 to-blue-700"
+  },
+  {
+    name: "Next.js",
+    percentage: 90,
+    color: "from-gray-700 to-gray-800"
+  },
+  {
+    name: "Angular",
+    percentage: 92,
+    color: "from-red-600 to-red-700"
+  },
+  {
+    name: "Express.js",
+    percentage: 97,
+    color: "from-gray-600 to-gray-700"
+  },
+  {
+    name: "Django",
+    percentage: 90,
+    color: "from-green-700 to-green-800"
+  },
+  {
+    name: "Rails",
+    percentage: 93,
+    color: "from-red-700 to-red-800"
+  },
+  {
+    name: "MongoDB",
+    percentage: 87,
+    color: "from-green-500 to-green-600"
+  },
+  {
+    name: "PostgreSQL",
+    percentage: 85,
+    color: "from-blue-700 to-blue-800"
+  },
+  {
+    name: "MySQL",
+    percentage: 82,
+    color: "from-orange-500 to-orange-600"
+  },
+  {
+    name: "Redis",
+    percentage: 80,
+    color: "from-red-500 to-red-600"
+  },
+  {
+    name: "GraphQL",
+    percentage: 85,
+    color: "from-pink-500 to-pink-600"
+  },
+  {
+    name: "REST API",
+    percentage: 90,
+    color: "from-purple-500 to-purple-600"
+  },
+  {
+    name: "Docker",
+    percentage: 82,
+    color: "from-blue-400 to-blue-500"
+  },
+  {
+    name: "AWS",
+    percentage: 90,
+    color: "from-orange-500 to-orange-600"
+  },
+  {
+    name: "Solana",
+    percentage: 92,
+    color: "from-purple-600 to-purple-700"
+  },
+  {
+    name: "Rust",
+    percentage: 90,
+    color: "from-orange-600 to-orange-700"
+  },
+  {
+    name: "Machine Learning",
+    percentage: 88,
+    color: "from-pink-600 to-pink-700"
+  },
+  {
+    name: "TensorFlow",
+    percentage: 85,
+    color: "from-orange-700 to-orange-800"
+  },
+  {
+    name: "PyTorch",
+    percentage: 83,
+    color: "from-red-400 to-red-500"
   }
 ];
 
@@ -736,42 +846,40 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-br from-gray-50 to-white">
-        <div className="container mx-auto">
+      <section id="skills" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-white">
+        <div className="container mx-auto max-w-4xl">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"
+            className="text-4xl font-bold text-center mb-16 text-gray-800"
           >
-            Technical Expertise
+            Technical Skills
           </motion.h2>
           <motion.div 
             variants={stagger}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+            className="space-y-4"
           >
-            {skillCategories.map((category, index) => (
+            {skills.map((skill, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full bg-gradient-to-br from-white to-gray-50 border-0 shadow-lg hover:shadow-xl transition-shadow">
-                  <CardHeader className="text-center pb-4">
-                    <div className="mx-auto mb-4 p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white w-fit">
-                      {category.icon}
-                    </div>
-                    <CardTitle className="text-xl font-semibold">{category.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2">
-                      {category.skills.map((skill, skillIndex) => (
-                        <Badge key={skillIndex} variant="secondary" className="bg-blue-100 text-blue-800 hover:bg-blue-200">
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors border border-gray-200">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-gray-800 font-medium text-lg">{skill.name}</span>
+                    <span className="text-gray-800 font-bold text-lg">{skill.percentage}%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.percentage}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.5, delay: index * 0.05, ease: "easeOut" }}
+                      className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
+                    />
+                  </div>
+                </div>
               </motion.div>
             ))}
           </motion.div>
