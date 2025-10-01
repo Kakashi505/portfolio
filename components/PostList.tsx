@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Calendar, Loader2 } from 'lucide-react'
+import { Calendar, Loader2, Settings } from 'lucide-react'
+import Link from 'next/link'
 import { Post } from '@/lib/db/supabase'
 
 interface PostListProps {
@@ -20,6 +21,8 @@ interface PostsResponse {
     cursor_ts: string
     cursor_id: string
   } | null
+  message?: string
+  error?: string
 }
 
 export default function PostList({ initialPosts = [], showPagination = true, limit = 10 }: PostListProps) {
@@ -56,10 +59,16 @@ export default function PostList({ initialPosts = [], showPagination = true, lim
       const response = await fetch(`/api/posts?${params.toString()}`)
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+        const errorData = await response.json().catch(() => ({}))
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`)
       }
       
       const data: PostsResponse = await response.json()
+      
+      // Check if there's a message about missing table
+      if (data.message) {
+        console.warn('Database setup needed:', data.message)
+      }
       
       if (cursor) {
         // Loading more posts
@@ -121,7 +130,27 @@ export default function PostList({ initialPosts = [], showPagination = true, lim
   if (posts.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">No posts found.</p>
+        <div className="max-w-md mx-auto">
+          <p className="text-gray-600 mb-4">No posts found.</p>
+          <p className="text-sm text-gray-500 mb-4">
+            If you're seeing this and expecting posts, the database might not be set up yet.
+          </p>
+          <div className="flex gap-2 justify-center">
+            <Button 
+              onClick={() => window.location.reload()} 
+              variant="outline"
+              size="sm"
+            >
+              Refresh
+            </Button>
+            <Link href="/setup">
+              <Button variant="outline" size="sm">
+                <Settings className="h-4 w-4 mr-2" />
+                Setup Database
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     )
   }

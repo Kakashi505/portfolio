@@ -13,41 +13,78 @@ export async function GET(req: NextRequest) {
     const cursor_ts = url.searchParams.get('cursor_ts')
     const cursor_id = url.searchParams.get('cursor_id')
 
-    // Use RPC function for robust cursor-based pagination
-    if (cursor_ts && cursor_id) {
-      const { data, error } = await supabase.rpc('fetch_posts_before', {
-        cursor_ts,
-        cursor_id,
-        page_size: limit
-      })
+    console.log('Posts API called with:', { limit, cursor_ts, cursor_id })
 
-      if (error) {
-        console.error('RPC Error:', error)
-        return NextResponse.json({ error: error.message }, { status: 500 })
-      }
+    // Check if posts table exists first
+    const { data: tableCheck, error: tableError } = await supabase
+      .from('posts')
+      .select('count')
+      .limit(1)
 
+    if (tableError) {
+      console.error('Table check error:', tableError)
+      // If table doesn't exist, return empty result instead of error
       return NextResponse.json({ 
-        posts: data || [],
-        hasMore: data && data.length === limit,
-        nextCursor: data && data.length > 0 ? {
-          cursor_ts: data[data.length - 1].created_at,
-          cursor_id: data[data.length - 1].id
-        } : null
+        posts: [],
+        hasMore: false,
+        nextCursor: null,
+        message: 'Posts table not found. Please run the database setup.'
       })
     }
 
-    // First page - no cursor
-    const { data, error } = await supabase
+    // Use RPC function for robust cursor-based pagination (if available)
+    if (cursor_ts && cursor_id) {
+      try {
+        const { data, error } = await supabase.rpc('fetch_posts_before', {
+          cursor_ts,
+          cursor_id,
+          page_size: limit
+        })
+
+        if (error) {
+          console.error('RPC Error, falling back to simple query:', error)
+          // Fall back to simple query if RPC fails
+        } else {
+          return NextResponse.json({ 
+            posts: data || [],
+            hasMore: data && data.length === limit,
+            nextCursor: data && data.length > 0 ? {
+              cursor_ts: data[data.length - 1].created_at,
+              cursor_id: data[data.length - 1].id
+            } : null
+          })
+        }
+      } catch (rpcError) {
+        console.error('RPC function not available, using simple query:', rpcError)
+      }
+    }
+
+    // Simple query (works without RPC function)
+    let query = supabase
       .from('posts')
       .select('id, title, body, published, created_at')
       .eq('published', true)
       .order('created_at', { ascending: false })
       .limit(limit)
 
+    // Add cursor filter if provided
+    if (cursor_ts) {
+      query = query.lt('created_at', cursor_ts)
+    }
+
+    const { data, error } = await query
+
     if (error) {
       console.error('Query Error:', error)
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ 
+        error: error.message,
+        posts: [],
+        hasMore: false,
+        nextCursor: null
+      }, { status: 500 })
     }
+
+    console.log('Query successful, found posts:', data?.length || 0)
 
     return NextResponse.json({ 
       posts: data || [],
@@ -60,7 +97,12 @@ export async function GET(req: NextRequest) {
 
   } catch (error) {
     console.error('API Error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json({ 
+      error: 'Internal server error',
+      posts: [],
+      hasMore: false,
+      nextCursor: null
+    }, { status: 500 })
   }
 }
 
