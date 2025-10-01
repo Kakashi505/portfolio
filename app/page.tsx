@@ -12,6 +12,118 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
+// Custom 3D Button Component
+const Button3D = ({ 
+  onClick, 
+  label, 
+  color = "blue", 
+  variant = "solid", 
+  size = "medium",
+  className = "",
+  children 
+}: { 
+  onClick?: () => void, 
+  label?: string, 
+  color?: "blue" | "purple" | "gray" | "white", 
+  variant?: "solid" | "outline", 
+  size?: "small" | "medium" | "large",
+  className?: string,
+  children?: React.ReactNode
+}) => {
+  const getColorClasses = () => {
+    if (variant === "outline") {
+      switch (color) {
+        case "blue": return "border-2 border-blue-500 text-blue-600 hover:bg-blue-50";
+        case "purple": return "border-2 border-purple-500 text-purple-600 hover:bg-purple-50";
+        case "gray": return "border-2 border-gray-500 text-gray-600 hover:bg-gray-50";
+        case "white": return "border-2 border-white text-white hover:bg-white/10";
+        default: return "border-2 border-blue-500 text-blue-600 hover:bg-blue-50";
+      }
+    } else {
+      switch (color) {
+        case "blue": return "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white";
+        case "purple": return "bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white";
+        case "gray": return "bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white";
+        case "white": return "bg-white text-blue-600 hover:bg-gray-100";
+        default: return "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white";
+      }
+    }
+  };
+
+  const getSizeClasses = () => {
+    switch (size) {
+      case "small": return "px-4 py-2 text-sm";
+      case "large": return "px-8 py-4 text-lg";
+      default: return "px-6 py-3 text-base";
+    }
+  };
+
+  return (
+    <motion.button
+      onClick={onClick}
+      className={`
+        ${getColorClasses()}
+        ${getSizeClasses()}
+        ${className}
+        font-semibold rounded-lg shadow-lg hover:shadow-xl
+        transform transition-all duration-200 ease-out
+        hover:scale-105 hover:-translate-y-1
+        active:scale-95 active:translate-y-0
+        relative overflow-hidden
+        before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
+      `}
+      whileHover={{ 
+        scale: 1.05,
+        y: -2,
+        transition: { duration: 0.2 }
+      }}
+      whileTap={{ 
+        scale: 0.95,
+        y: 0,
+        transition: { duration: 0.1 }
+      }}
+    >
+      <span className="relative z-10">
+        {children || label}
+      </span>
+    </motion.button>
+  );
+};
+
+// Custom 3D Card Component
+const Card3D = ({ 
+  children, 
+  className = "",
+  hover = true 
+}: { 
+  children: React.ReactNode, 
+  className?: string,
+  hover?: boolean
+}) => {
+  return (
+    <motion.div
+      className={`
+        ${className}
+        bg-white rounded-xl shadow-lg
+        ${hover ? 'hover:shadow-2xl' : ''}
+        transform transition-all duration-300 ease-out
+        ${hover ? 'hover:scale-105 hover:-translate-y-2' : ''}
+        relative overflow-hidden
+        before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/10 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
+      `}
+      whileHover={hover ? { 
+        scale: 1.05,
+        y: -8,
+        transition: { duration: 0.3 }
+      } : {}}
+    >
+      <div className="relative z-10">
+        {children}
+      </div>
+    </motion.div>
+  );
+};
+
 const stagger = {
   visible: {
     transition: {
@@ -632,22 +744,22 @@ const MobileSlideshow = ({
             {currentIndex + 1} / {items.length}
           </span>
           <div className="flex gap-1">
-            <Button
-              variant="outline"
-              size="sm"
+            <Button3D
               onClick={prevSlide}
-              className="h-8 w-8 p-0"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button
+              label=""
+              color="gray"
               variant="outline"
-              size="sm"
-              onClick={nextSlide}
+              size="small"
               className="h-8 w-8 p-0"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
+            />
+            <Button3D
+              onClick={nextSlide}
+              label=""
+              color="gray"
+              variant="outline"
+              size="small"
+              className="h-8 w-8 p-0"
+            />
           </div>
         </div>
       </div>
@@ -686,7 +798,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => (
     viewport={{ once: true, margin: "-100px" }}
     transition={{ delay: index * 0.1 }}
   >
-    <Card className="group h-full overflow-hidden hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50">
+    <Card3D className="group h-full overflow-hidden border-0 bg-gradient-to-br from-white to-gray-50">
       <div className="relative overflow-hidden">
         <img
           src={project.image}
@@ -743,30 +855,28 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => (
         )}
         <div className="flex gap-2">
           {project.website && (
-        <Button
-          variant="ghost"
-          size="sm"
-              className="flex-1 justify-center hover:bg-blue-50 hover:text-blue-600"
+            <Button3D
               onClick={() => window.open(project.website, '_blank')}
-        >
-              <ExternalLink className="h-4 w-4 mr-1" />
-              Live Site
-        </Button>
+              label="Live Site"
+              color="blue"
+              variant="outline"
+              size="small"
+              className="flex-1"
+            />
           )}
           {project.github && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="flex-1 justify-center hover:bg-gray-50 hover:text-gray-600"
+            <Button3D
               onClick={() => window.open(project.github, '_blank')}
-            >
-              <Github className="h-4 w-4 mr-1" />
-              GitHub
-            </Button>
+              label="GitHub"
+              color="purple"
+              variant="outline"
+              size="small"
+              className="flex-1"
+            />
           )}
         </div>
       </CardContent>
-    </Card>
+    </Card3D>
   </motion.div>
 );
 
@@ -952,14 +1062,21 @@ export default function Portfolio() {
               innovative solutions that bridge traditional software and emerging technologies.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-4 mb-8 sm:mb-12 px-4">
-              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 w-full sm:w-auto">
-                <Mail className="h-5 w-5 mr-2" />
-                Get In Touch
-              </Button>
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                <Github className="h-5 w-5 mr-2" />
-                View Projects
-              </Button>
+              <Button3D 
+                onClick={() => scrollToSection('contact')}
+                label="Get In Touch"
+                color="blue"
+                size="large"
+                className="w-full sm:w-auto"
+              />
+              <Button3D 
+                onClick={() => scrollToSection('full-stack')}
+                label="View Projects"
+                color="purple"
+                variant="outline"
+                size="large"
+                className="w-full sm:w-auto"
+              />
             </div>
           </motion.div>
 
@@ -1107,7 +1224,7 @@ export default function Portfolio() {
           >
             {clientReviews.map((review, index) => (
               <motion.div key={review.id} variants={fadeInUp}>
-                <Card className="h-full bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Card3D className="h-full bg-white border-0">
                   <CardHeader className="pb-4">
                     <div className="mb-4">
                       <h3 className="font-semibold text-gray-900 text-lg">{review.clientName}</h3>
@@ -1149,7 +1266,7 @@ export default function Portfolio() {
                       </p>
                     </div>
                   </CardContent>
-                </Card>
+                </Card3D>
               </motion.div>
             ))}
           </motion.div>
@@ -1161,7 +1278,7 @@ export default function Portfolio() {
             setCurrentIndex={setCurrentReviewIndex}
             title="Client Reviews"
             renderItem={(review, index) => (
-              <Card className="h-full bg-white border-0 shadow-lg">
+              <Card3D className="h-full bg-white border-0">
                 <CardHeader className="pb-4">
                   <div className="mb-4">
                     <h3 className="font-semibold text-gray-900 text-lg">{review.clientName}</h3>
@@ -1203,7 +1320,7 @@ export default function Portfolio() {
                     </p>
                   </div>
                 </CardContent>
-              </Card>
+              </Card3D>
             )}
           />
 
@@ -1252,7 +1369,7 @@ export default function Portfolio() {
           >
             {certifications.map((cert, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="group h-full overflow-hidden hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50">
+                <Card3D className="group h-full overflow-hidden border-0 bg-gradient-to-br from-white to-gray-50">
                   <div className="relative overflow-hidden">
                     <img
                       src={cert.image}
@@ -1279,17 +1396,16 @@ export default function Portfolio() {
                     <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                       {cert.description}
                     </p>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="w-full justify-center hover:bg-blue-50 hover:text-blue-600"
+                    <Button3D
                       onClick={() => openCertificateModal(cert)}
-                    >
-                      View Certificate
-                      <ExternalLink className="h-4 w-4 ml-2" />
-                    </Button>
+                      label="View Certificate"
+                      color="blue"
+                      variant="outline"
+                      size="small"
+                      className="w-full"
+                    />
                   </CardContent>
-                </Card>
+                </Card3D>
               </motion.div>
             ))}
           </motion.div>
@@ -1301,7 +1417,7 @@ export default function Portfolio() {
             setCurrentIndex={setCurrentCertIndex}
             title="Certifications"
             renderItem={(cert, index) => (
-              <Card className="group h-full overflow-hidden shadow-lg border-0 bg-gradient-to-br from-white to-gray-50">
+              <Card3D className="group h-full overflow-hidden border-0 bg-gradient-to-br from-white to-gray-50">
                 <div className="relative overflow-hidden">
                   <img
                     src={cert.image}
@@ -1327,17 +1443,16 @@ export default function Portfolio() {
                   <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                     {cert.description}
                   </p>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="w-full justify-center hover:bg-blue-50 hover:text-blue-600"
+                  <Button3D
                     onClick={() => openCertificateModal(cert)}
-                  >
-                    View Certificate
-                    <ExternalLink className="h-4 w-4 ml-2" />
-                  </Button>
+                    label="View Certificate"
+                    color="blue"
+                    variant="outline"
+                    size="small"
+                    className="w-full"
+                  />
                 </CardContent>
-              </Card>
+              </Card3D>
             )}
           />
         </div>
@@ -1465,18 +1580,27 @@ export default function Portfolio() {
               Ready to bring your next project to life? Let&apos;s discuss how we can create innovative solutions together.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-8 sm:mb-12 px-4">
-              <Button variant="secondary" size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-                <Mail className="h-5 w-5 mr-2" />
-                businessman999777555@gmail.com
-              </Button>
-              <Button variant="secondary" size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-                <Github className="h-5 w-5 mr-2" />
-                GitHub
-              </Button>
-              <Button variant="secondary" size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-                <MessageSquare className="h-5 w-5 mr-2" />
-                Discord
-              </Button>
+              <Button3D 
+                onClick={() => window.open('mailto:businessman999777555@gmail.com', '_blank')}
+                label="businessman999777555@gmail.com"
+                color="white"
+                size="large"
+                className="bg-white text-blue-600"
+              />
+              <Button3D 
+                onClick={() => window.open('https://github.com/Micklitodev', '_blank')}
+                label="GitHub"
+                color="white"
+                size="large"
+                className="bg-white text-blue-600"
+              />
+              <Button3D 
+                onClick={() => window.open('https://discord.gg/your-discord', '_blank')}
+                label="Discord"
+                color="white"
+                size="large"
+                className="bg-white text-blue-600"
+              />
             </div>
             <div className="text-blue-100">
               <p>© 2025 鹿島 秀行 (Kashima Hideyuki). All rights reserved.</p>
@@ -1532,13 +1656,14 @@ export default function Portfolio() {
             
             {/* Modal Footer */}
             <div className="flex justify-end p-6 border-t border-gray-200">
-              <Button
-                onClick={closeCertificateModal}
-                variant="outline"
-                className="px-6"
-              >
-                Close
-              </Button>
+               <Button3D
+                 onClick={closeCertificateModal}
+                 label="Close"
+                 color="gray"
+                 variant="outline"
+                 size="medium"
+                 className="px-6"
+               />
             </div>
           </motion.div>
         </motion.div>
