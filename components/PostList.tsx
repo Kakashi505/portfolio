@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Calendar, Loader2, Settings } from 'lucide-react'
+import { Calendar, Loader2, Settings, Edit, Trash2, Eye } from 'lucide-react'
 import Link from 'next/link'
 import { Post } from '@/lib/db/supabase'
 
@@ -32,6 +32,8 @@ export default function PostList({ initialPosts = [], showPagination = true, lim
   const [hasMore, setHasMore] = useState(true)
   const [nextCursor, setNextCursor] = useState<{cursor_ts: string, cursor_id: string} | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null)
+  const [deleting, setDeleting] = useState<string | null>(null)
 
   useEffect(() => {
     if (initialPosts.length === 0) {
@@ -94,6 +96,29 @@ export default function PostList({ initialPosts = [], showPagination = true, lim
     if (nextCursor && hasMore) {
       setLoadingMore(true)
       fetchPosts(nextCursor)
+    }
+  }
+
+  const handleDelete = async (postId: string) => {
+    setDeleting(postId)
+    try {
+      const response = await fetch(`/api/posts?id=${postId}`, {
+        method: 'DELETE'
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to delete post')
+      }
+
+      // Remove the post from the local state
+      setPosts(prev => prev.filter(post => post.id !== postId))
+      setDeleteConfirm(null)
+    } catch (error) {
+      console.error('Error deleting post:', error)
+      setError(error instanceof Error ? error.message : 'Failed to delete post')
+    } finally {
+      setDeleting(null)
     }
   }
 
@@ -181,13 +206,58 @@ export default function PostList({ initialPosts = [], showPagination = true, lim
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="prose prose-gray max-w-none">
+                <div className="prose prose-gray max-w-none mb-4">
                   <p className="text-gray-700 leading-relaxed">
                     {post.body.length > 200 
                       ? `${post.body.substring(0, 200)}...` 
                       : post.body
                     }
                   </p>
+                </div>
+                
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <span className={`px-2 py-1 text-xs rounded-full ${
+                      post.published 
+                        ? 'bg-green-100 text-green-800' 
+                        : 'bg-yellow-100 text-yellow-800'
+                    }`}>
+                      {post.published ? 'Published' : 'Draft'}
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    <Link href={`/blog/${post.id}`}>
+                      <Button variant="outline" size="sm">
+                        <Eye className="h-4 w-4 mr-1" />
+                        View
+                      </Button>
+                    </Link>
+                    
+                    <Link href={`/blog/edit/${post.id}`}>
+                      <Button variant="outline" size="sm">
+                        <Edit className="h-4 w-4 mr-1" />
+                        Edit
+                      </Button>
+                    </Link>
+                    
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => setDeleteConfirm(post.id)}
+                      disabled={deleting === post.id}
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                    >
+                      {deleting === post.id ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <>
+                          <Trash2 className="h-4 w-4 mr-1" />
+                          Delete
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -218,6 +288,47 @@ export default function PostList({ initialPosts = [], showPagination = true, lim
       {!hasMore && posts.length > 0 && (
         <div className="text-center py-6">
           <p className="text-gray-500">You've reached the end of the posts!</p>
+        </div>
+      )}
+
+      {/* Delete Confirmation Dialog */}
+      {deleteConfirm && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-white rounded-lg shadow-xl max-w-md w-full p-6"
+          >
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              Confirm Delete
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Are you sure you want to delete this post? This action cannot be undone.
+            </p>
+            <div className="flex gap-3 justify-end">
+              <Button
+                variant="outline"
+                onClick={() => setDeleteConfirm(null)}
+                disabled={deleting === deleteConfirm}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={() => handleDelete(deleteConfirm)}
+                disabled={deleting === deleteConfirm}
+              >
+                {deleting === deleteConfirm ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  'Delete Post'
+                )}
+              </Button>
+            </div>
+          </motion.div>
         </div>
       )}
     </div>

@@ -133,3 +133,59 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
+
+export async function PUT(req: NextRequest) {
+  try {
+    const requestBody = await req.json()
+    const { id, title, body, published } = requestBody
+
+    if (!id || !title || !body) {
+      return NextResponse.json({ error: 'ID, title and body are required' }, { status: 400 })
+    }
+
+    const { data, error } = await supabase
+      .from('posts')
+      .update({ title, body, published })
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) {
+      console.error('Update Error:', error)
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json({ post: data }, { status: 200 })
+
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const url = new URL(req.url)
+    const id = url.searchParams.get('id')
+
+    if (!id) {
+      return NextResponse.json({ error: 'Post ID is required' }, { status: 400 })
+    }
+
+    const { error } = await supabase
+      .from('posts')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      console.error('Delete Error:', error)
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json({ message: 'Post deleted successfully' }, { status: 200 })
+
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}

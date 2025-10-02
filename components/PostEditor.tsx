@@ -14,6 +14,7 @@ interface PostEditorProps {
   onSave?: (post: any) => void
   onCancel?: () => void
   initialPost?: {
+    id?: string
     title: string
     body: string
     published: boolean
@@ -37,21 +38,31 @@ export default function PostEditor({ onSave, onCancel, initialPost }: PostEditor
     setError(null)
 
     try {
+      const isEditing = initialPost?.id
+      const method = isEditing ? 'PUT' : 'POST'
+      
+      const requestBody = {
+        title: title.trim(),
+        body: body.trim(),
+        published
+      }
+
+      // Add ID for update operations
+      if (isEditing) {
+        (requestBody as any).id = initialPost.id
+      }
+
       const response = await fetch('/api/posts', {
-        method: 'POST',
+        method,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          title: title.trim(),
-          body: body.trim(),
-          published
-        })
+        body: JSON.stringify(requestBody)
       })
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to save post')
+        throw new Error(errorData.error || `Failed to ${isEditing ? 'update' : 'save'} post`)
       }
 
       const data = await response.json()
