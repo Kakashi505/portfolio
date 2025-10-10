@@ -351,7 +351,7 @@ const fullStackProjects = [
     year: "2024",
     image: "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://ecommerceparadise.com",
-    github: "https://github.com/Micklitodev/Paradise-Ecom",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Full-Stack Developer",
     skills: ["Frontend Development", "Backend API", "Payment Integration", "Database Design"]
   },
@@ -362,7 +362,7 @@ const fullStackProjects = [
     year: "2024",
     image: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://socket.io/demos/chat",
-    github: "https://github.com/socketio/socket.io",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Full-Stack Developer",
     skills: ["Real-time Communication", "WebSocket Implementation", "User Authentication", "Message Encryption"]
   },
@@ -373,7 +373,7 @@ const fullStackProjects = [
     year: "2023",
     image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://app.asana.com",
-    github: "https://github.com/Asana/asana",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Full-Stack Developer",
     skills: ["Project Management", "Team Collaboration", "Real-time Updates", "GraphQL API"]
   },
@@ -384,7 +384,7 @@ const fullStackProjects = [
     year: "2023",
     image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://analytics.google.com",
-    github: "https://github.com/googleanalytics",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Frontend Developer",
     skills: ["Data Visualization", "Analytics Dashboard", "Chart Implementation", "API Integration"]
   },
@@ -395,7 +395,7 @@ const fullStackProjects = [
     year: "2023",
     image: "https://images.pexels.com/photos/3945313/pexels-photo-3945313.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.netflix.com",
-    github: "https://github.com/Netflix",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Full-Stack Developer",
     skills: ["Video Streaming", "Subscription Management", "Content Management", "AWS Integration"]
   },
@@ -406,7 +406,7 @@ const fullStackProjects = [
     year: "2022",
     image: "https://images.pexels.com/photos/4393426/pexels-photo-4393426.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.ubereats.com",
-    github: "https://github.com/uber",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Mobile Developer",
     skills: ["Mobile Development", "Real-time Tracking", "Payment Processing", "Location Services"]
   },
@@ -417,7 +417,7 @@ const fullStackProjects = [
     year: "2022",
     image: "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://moodle.org",
-    github: "https://github.com/moodle/moodle",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Full-Stack Developer",
     skills: ["Educational Technology", "Course Management", "Progress Tracking", "Assessment System"]
   },
@@ -428,7 +428,7 @@ const fullStackProjects = [
     year: "2022",
     image: "https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.zoho.com/inventory",
-    github: "https://github.com/zoho",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Full-Stack Developer",
     skills: ["Inventory Management", "Barcode Scanning", "Reporting System", "Docker Deployment"]
   },
@@ -439,7 +439,7 @@ const fullStackProjects = [
     year: "2021",
     image: "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.epic.com",
-    github: "https://github.com/epic",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Full-Stack Developer",
     skills: ["Healthcare Technology", "Patient Management", "Appointment Scheduling", "HIPAA Compliance"]
   },
@@ -450,7 +450,7 @@ const fullStackProjects = [
     year: "2021",
     image: "https://images.pexels.com/photos/186461/pexels-photo-186461.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.mint.com",
-    github: "https://github.com/mint",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Full-Stack Developer",
     skills: ["Financial Technology", "Portfolio Management", "Data Visualization", "Investment Tracking"]
   }
@@ -464,7 +464,7 @@ const blockchainProjects = [
     year: "2024",
     image: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://opensea.io",
-    github: "https://github.com/ProjectOpenSea",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Blockchain Developer",
     skills: ["Smart Contract Development", "NFT Minting", "Trading System", "Royalty Distribution"]
   },
@@ -475,7 +475,7 @@ const blockchainProjects = [
     year: "2024",
     image: "https://images.pexels.com/photos/6801874/pexels-photo-6801874.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://sundaeswap.finance",
-    github: "https://github.com/SundaeSwap-finance",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Blockchain Developer",
     skills: ["DeFi Development", "Smart Contract Security", "Lending Protocol", "Borrowing System"]
   },
@@ -486,7 +486,7 @@ const blockchainProjects = [
     year: "2024",
     image: "https://images.pexels.com/photos/194511/pexels-photo-194511.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://sui.io",
-    github: "https://github.com/MystenLabs",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Blockchain Developer",
     skills: ["Game Development", "NFT Integration", "Asset Trading", "Move Programming"]
   },
@@ -497,7 +497,7 @@ const blockchainProjects = [
     year: "2023",
     image: "https://images.pexels.com/photos/5980582/pexels-photo-5980582.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://app.1inch.io",
-    github: "https://github.com/1inch",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Blockchain Developer",
     skills: ["Cross-chain Development", "DEX Implementation", "Bridge Protocol", "Multi-chain Integration"]
   },
@@ -508,7 +508,7 @@ const blockchainProjects = [
     year: "2023",
     image: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://snapshot.org",
-    github: "https://github.com/snapshot-labs",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Blockchain Developer",
     skills: ["DAO Development", "Governance System", "Voting Mechanism", "Proposal Management"]
   },
@@ -519,7 +519,7 @@ const blockchainProjects = [
     year: "2023",
     image: "https://images.pexels.com/photos/6801874/pexels-photo-6801874.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://app.uniswap.org",
-    github: "https://github.com/Uniswap",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "DeFi Developer",
     skills: ["Yield Farming", "Liquidity Mining", "Staking Rewards", "DeFi Protocol"]
   },
@@ -530,7 +530,7 @@ const blockchainProjects = [
     year: "2022",
     image: "https://images.pexels.com/photos/4246119/pexels-photo-4246119.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.ibm.com/supply-chain",
-    github: "https://github.com/IBM",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Blockchain Developer",
     skills: ["Supply Chain Management", "Transparency System", "Authenticity Verification", "Hyperledger"]
   },
@@ -541,7 +541,7 @@ const blockchainProjects = [
     year: "2022",
     image: "https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.realt.com",
-    github: "https://github.com/RealTPlatform",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Blockchain Developer",
     skills: ["Asset Tokenization", "Fractional Ownership", "Real Estate Technology", "Smart Contract Security"]
   },
@@ -552,7 +552,7 @@ const blockchainProjects = [
     year: "2022",
     image: "https://images.pexels.com/photos/9800036/pexels-photo-9800036.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.toucan.earth",
-    github: "https://github.com/ToucanProtocol",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Blockchain Developer",
     skills: ["Carbon Credit Trading", "Environmental Technology", "Marketplace Development", "Sustainability"]
   },
@@ -563,7 +563,7 @@ const blockchainProjects = [
     year: "2021",
     image: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.civic.com",
-    github: "https://github.com/civicteam",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "Blockchain Developer",
     skills: ["Identity Management", "Privacy Preservation", "Zero-Knowledge Proofs", "Self-Sovereign Identity"]
   }
@@ -577,7 +577,7 @@ const aiProjects = [
     year: "2024",
     image: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://translate.google.com",
-    github: "https://github.com/google",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "AI Developer",
     skills: ["Natural Language Processing", "Translation API", "Multilingual Support", "Real-time Processing"]
   },
@@ -588,7 +588,7 @@ const aiProjects = [
     year: "2024",
     image: "https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.copy.ai",
-    github: "https://github.com/copy-ai",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "AI Developer",
     skills: ["Content Generation", "AI Writing", "Marketing Automation", "Blog Management"]
   },
@@ -599,7 +599,7 @@ const aiProjects = [
     year: "2024",
     image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://chat.openai.com",
-    github: "https://github.com/openai",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "AI Developer",
     skills: ["Conversational AI", "Customer Support", "Natural Language Understanding", "Real-time Chat"]
   },
@@ -610,7 +610,7 @@ const aiProjects = [
     year: "2023",
     image: "https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.tableau.com",
-    github: "https://github.com/tableau",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "AI Developer",
     skills: ["Data Analytics", "AI Insights", "Data Visualization", "Business Intelligence"]
   },
@@ -621,7 +621,7 @@ const aiProjects = [
     year: "2023",
     image: "https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.clarifai.com",
-    github: "https://github.com/Clarifai",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "AI Developer",
     skills: ["Computer Vision", "Image Classification", "Object Detection", "Machine Learning"]
   },
@@ -632,7 +632,7 @@ const aiProjects = [
     year: "2023",
     image: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.amazon.com",
-    github: "https://github.com/amazon",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "AI Developer",
     skills: ["Recommendation System", "Personalization", "Machine Learning", "E-commerce Integration"]
   },
@@ -643,7 +643,7 @@ const aiProjects = [
     year: "2022",
     image: "https://images.pexels.com/photos/7130469/pexels-photo-7130469.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://assistant.google.com",
-    github: "https://github.com/google",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "AI Developer",
     skills: ["Speech Recognition", "Text-to-Speech", "Voice Interface", "WebRTC"]
   },
@@ -654,7 +654,7 @@ const aiProjects = [
     year: "2022",
     image: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.sift.com",
-    github: "https://github.com/sift",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "AI Developer",
     skills: ["Fraud Detection", "Risk Assessment", "Financial Security", "Machine Learning"]
   },
@@ -665,7 +665,7 @@ const aiProjects = [
     year: "2022",
     image: "https://images.pexels.com/photos/261662/pexels-photo-261662.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.grammarly.com",
-    github: "https://github.com/grammarly",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "AI Developer",
     skills: ["Content Writing", "Text Optimization", "AI Editing", "Writing Tools"]
   },
@@ -676,7 +676,7 @@ const aiProjects = [
     year: "2021",
     image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600",
     website: "https://www.powerbi.microsoft.com",
-    github: "https://github.com/microsoft",
+    github: "https://github.com/optimizm0?tab=repositories",
     role: "AI Developer",
     skills: ["Business Intelligence", "Data Forecasting", "Analytics Platform", "Data Pipeline"]
   }
@@ -1156,7 +1156,7 @@ export default function Portfolio() {
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-gray-800 font-medium text-lg">{skill.name}</span>
                     <span className="text-gray-800 font-bold text-lg">{skill.percentage}%</span>
-                  </div>
+                    </div>
                   <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
@@ -1292,7 +1292,7 @@ export default function Portfolio() {
                   <div className="flex items-center gap-2 mb-3">
                     <Badge variant="secondary" className="bg-blue-100 text-blue-800">
                       {review.project}
-                    </Badge>
+                        </Badge>
                   </div>
 
                   <div className="flex items-center gap-1">
@@ -1318,8 +1318,8 @@ export default function Portfolio() {
                     <p className="text-gray-700 leading-relaxed pl-4">
                       {review.review}
                     </p>
-                  </div>
-                </CardContent>
+                    </div>
+                  </CardContent>
               </Card3D>
             )}
           />
@@ -1588,7 +1588,7 @@ export default function Portfolio() {
                 className="bg-white text-blue-600"
               />
               <Button3D 
-                onClick={() => window.open('https://github.com/Micklitodev', '_blank')}
+                onClick={() => window.open('https://github.com/optimizm0?tab=repositories', '_blank')}
                 label="GitHub"
                 color="white"
                 size="large"
